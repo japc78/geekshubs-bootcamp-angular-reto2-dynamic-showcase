@@ -1,0 +1,9 @@
+@mixin mediaqueries_992($maxWith: 992px) {
+  .product {
+    .product-preview {
+      .product-name {
+        font-size: 1.8em;
+      }
+    }
+  }
+}

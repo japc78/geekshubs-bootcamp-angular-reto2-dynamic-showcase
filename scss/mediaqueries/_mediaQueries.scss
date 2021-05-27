@@ -1,0 +1,26 @@
+@import "./480", "./600", "./600", "./768", "./992", "./1140";
+
+// 480px
+@media only screen and (min-width: 480px) {
+  @include mediaqueries_480;
+}
+
+// 600px
+@media only screen and (min-width: 600px) {
+  @include mediaqueries_600;
+}
+
+// 768px
+@media only screen and (min-width: 768px) {
+  @include mediaqueries_768;
+}
+
+// 992px
+@media only screen and (min-width: 992px) {
+  @include mediaqueries_992;
+}
+
+// 1140 px
+@media only screen and (min-width: 1140px) {
+  @include mediaqueries_1140;
+}

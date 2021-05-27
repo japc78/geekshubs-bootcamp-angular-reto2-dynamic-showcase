@@ -1,0 +1,17 @@
+@keyframes preload {
+  0% {
+    opacity:1;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  90% {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  100% {
+    opacity: 0;
+    height: 0;
+  }
+}

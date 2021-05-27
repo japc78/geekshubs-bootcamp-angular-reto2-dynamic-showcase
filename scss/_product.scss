@@ -1,0 +1,54 @@
+.product {
+  $fontSize: 8;
+
+  width: auto;
+  @include rounded(10px);
+  overflow: hidden;
+  background: $color1;
+  transition: all .3s ease-in-out;
+  border:3px solid $color1dark;
+  @include font-size($fontSize);
+  line-height: 1em;
+
+  &:hover {
+    background: $color1darken;
+    transform: scale(1.05);
+  }
+
+  .product-preview {
+    display: grid;
+
+    grid-template-rows: 65% 1fr;
+    height: 100%;
+    .image {
+      width: 100%;
+
+      img {
+        object-fit: cover;
+        object-position: center center;
+      }
+    }
+
+    .product-paper {
+      background: rgba($black, .05);
+      padding: 0 $generalPadding / 2;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+      row-gap: 3px;
+    }
+
+    .product-name {
+      font-size: 1.4em;
+      text-align: center;
+      font-weight: 300;
+    }
+
+    .product-price {
+      font-size: 1.8em;
+      text-align: center;
+    }
+  }
+}
