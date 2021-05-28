@@ -48,6 +48,8 @@ footer {
   min-height: 150px;
   position: relative;
   @include rounded(15px);
+  padding: $generalPadding *2;
+  transition: all .5s ease-in-out;
 
   span {
     display: flex;
@@ -61,11 +63,14 @@ footer {
     line-height: 1em;
     font-weight: lighter;
     padding: $generalPadding;
+
+    &.hide {
+      display: none;
+    }
   }
 }
 
 .list {
-
   display: grid;
   @include col3;
   grid-gap: $gridGap;

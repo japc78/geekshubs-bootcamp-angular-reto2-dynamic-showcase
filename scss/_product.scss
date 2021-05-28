@@ -5,14 +5,25 @@
   @include rounded(10px);
   overflow: hidden;
   background: $color1;
-  transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out, opacity 1s ease-in-out;
   border:3px solid $color1dark;
   @include font-size($fontSize);
   line-height: 1em;
+  cursor: pointer;
+  height: 100%;
 
   &:hover {
     background: $color1darken;
     transform: scale(1.05);
+  }
+
+  .item.hide & {
+    opacity: .25;
+    &:hover {
+      transform: scale(1);
+      background: $color1;
+      cursor: no-drop;
+    }
   }
 
   .product-preview {
