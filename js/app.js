@@ -1,5 +1,7 @@
 const dropZone = document.querySelector('#dropZone');
 const items = document.querySelectorAll('.item');
+const btnReset = document.querySelector('#btnReset');
+
 let dragItem;
 
 function dragStart(e) {
@@ -43,8 +45,25 @@ const drop = (e) => {
   dragItem.setAttribute('draggable', false);
   dragItem.className += ' hide';
   e.currentTarget.innerHTML += data;
-  console.log(data);
-}
+  // console.log(data);
+};
+
+const reset = () => {
+  console.log("pass reset");
+  let txt = dropZone.querySelector('span');
+  while (dropZone.lastChild != txt) {
+    dropZone.lastChild.remove();
+  }
+
+  txt.classList.remove('hide');
+
+  items.forEach(item => {
+    item.setAttribute('draggable', true);
+    item.classList.remove('hide');
+  });
+};
+
+btnReset.addEventListener('click', reset);
 
 // items Listener
 items.forEach(item => {
