@@ -63,3 +63,67 @@ h1 {
 small {
   @include font-size(12);
 }
+
+// Botones
+.btn {
+  text-align: center;
+  color: $btnTxtColor;
+  background-color: $btnBgColor;
+  display: inline-block;
+  padding: 10px 15px 9px;
+  cursor: pointer;
+  @include font-size($btnTxTSize);
+  text-transform: uppercase;
+  font-weight: 900;
+  width: auto;
+  letter-spacing: 1px;
+  position: relative;
+  line-height: 1em;
+  transition: all 0.3s ease-in-out;
+
+  @if $btnBorderRadius > 0 {
+    @include rounded($btnBorderRadius);
+  }
+
+  @if $btnBorderSize > 0 {
+    border: $btnBorderSize solid $btnBorderColor;
+  } @else {
+    border: 0;
+  }
+
+  &.small {
+    @include font-size($btnSmallTxtSize);
+    font-family: $baseFont;
+    padding: 7px 10px 6px;
+    line-height: 1em;
+
+    @if $btnBorderRadius > 0 {
+      @include rounded($btnBorderRadius);
+    }
+
+    @if $btnBorderSize > 0 {
+      border: $btnBorderSize solid $btnBorderColor;
+    }
+  }
+
+  &:hover {
+    @if $btnBorderSize > 0 {
+      border: $btnBorderSize solid $btnBorderColorHover;
+    }
+    background-color: $btnBgColorHover;
+    color: $btnTxtColorHover;
+  }
+
+  &:disabled {
+    background: $btnDisableBgColor;
+    cursor: default;
+    @if $btnBorderSize > 0 {
+      border: $btnBorderSize solid $btnDisableBorderColor;
+    }
+    color: $btnDisableTxtColor;
+  }
+
+  i {
+    display: none;
+  }
+}

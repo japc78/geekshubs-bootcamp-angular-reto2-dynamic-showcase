@@ -60,3 +60,22 @@ $generalPadding:1.5rem;
 
 // Grid
 $gridGap: $generalPadding;
+
+// Botones
+$btnTxtColor:$color3;
+$btnTxTSize: 12;
+$btnBgColor: $color2lighter;
+$btnBorderSize: 3px;
+$btnBorderRadius: 10px;
+$btnBorderColor: $color1dark;
+
+$btnTxtColorHover: $btnTxtColor;
+$btnBgColorHover: $color2;
+$btnBorderColorHover: $btnBgColorHover;
+
+$btnDisableTxtColor: $grey;
+$btnDisableBorderColor: $btnDisableTxtColor;
+$btnDisableBgColor: $lightGrey;
+
+$btnBorderSizeSmall: 2px;
+$btnSmallTxtSize: 10;
