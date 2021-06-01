@@ -26,7 +26,7 @@ const dragLeave = () => {
 }
 
 // Drop in Cart
-const drop = (e) => {
+const dropCart = (e) => {
   // console.log('drop cart');
   if (dragItem.parentElement != cartZone) {
     const data = e.dataTransfer.getData('item');
@@ -104,7 +104,7 @@ const init = ()=> {
   cartZone.addEventListener("dragover", dragOver);
   cartZone.addEventListener("dragenter", dragEnter);
   cartZone.addEventListener("dragleave", dragLeave);
-  cartZone.addEventListener("drop", drop);
+  cartZone.addEventListener("drop", dropCart);
 
 
   // Store listener
