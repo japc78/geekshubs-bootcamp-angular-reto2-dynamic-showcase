@@ -27,8 +27,8 @@ const dragLeave = () => {
 
 // Drop in Cart
 const drop = (e) => {
-  console.log('drop cart');
-  if (dragItem.parentElement != dropZone) {
+  // console.log('drop cart');
+  if (dragItem.parentElement != cartZone) {
     const data = e.dataTransfer.getData('item');
 
     if (!e.currentTarget.querySelector('hide')) {
@@ -42,7 +42,7 @@ const drop = (e) => {
     e.currentTarget.innerHTML += data;
 
     // Se add a los elementos carrito su los eventos correspondientes
-    const itemsCart = dropZone.querySelectorAll('.item');
+    const itemsCart = cartZone.querySelectorAll('.item');
     itemsCart.forEach(item => {
       item.addEventListener("dragstart", dragStart);
       item.addEventListener("dragend", dragEnd);
@@ -59,10 +59,10 @@ const dropStore = (e) => {
     const item = storeZone.querySelector(`[data-id="${id}"]`);
     item.classList.remove("hide");
     item.setAttribute('draggable', true);
-    dropZone.removeChild(dragItem);
+    cartZone.removeChild(dragItem);
 
-    if (dropZone.querySelectorAll('.item').length == 0) {
-      dropZone.querySelector('span').classList.remove('hide');
+    if (cartZone.querySelectorAll('.item').length == 0) {
+      cartZone.querySelector('span').classList.remove('hide');
     }
   }
 }
@@ -70,9 +70,9 @@ const dropStore = (e) => {
 
 // Reset todos los valores.
 const reset = () => {
-  let txt = dropZone.querySelector('span');
-  while (dropZone.lastChild != txt) {
-    dropZone.lastChild.remove();
+  let txt = cartZone.querySelector('span');
+  while (cartZone.lastChild != txt) {
+    cartZone.lastChild.remove();
   }
 
   txt.classList.remove('hide');
@@ -85,7 +85,7 @@ const reset = () => {
 
 
 const init = ()=> {
-  const dropZone = document.querySelector('#dropZone');
+  const cartZone = document.querySelector('#cartZone');
   const storeZone = document.querySelector('#storeZone');
   const items = storeZone.querySelectorAll('.item');
   const btnReset = document.querySelector('#btnReset');
@@ -101,10 +101,10 @@ const init = ()=> {
   });
 
   // Cart listener
-  dropZone.addEventListener("dragover", dragOver);
-  dropZone.addEventListener("dragenter", dragEnter);
-  dropZone.addEventListener("dragleave", dragLeave);
-  dropZone.addEventListener("drop", drop);
+  cartZone.addEventListener("dragover", dragOver);
+  cartZone.addEventListener("dragenter", dragEnter);
+  cartZone.addEventListener("dragleave", dragLeave);
+  cartZone.addEventListener("drop", drop);
 
 
   // Store listener
