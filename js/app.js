@@ -1,55 +1,75 @@
-const dropZone = document.querySelector('#dropZone');
-const items = document.querySelectorAll('.item');
-const btnReset = document.querySelector('#btnReset');
-
-let dragItem;
-
-function dragStart(e) {
-  console.log('drag start');
-  dragItem = this;
-  e.dataTransfer.setData('item', this.cloneNode(true).innerHTML);
+const dragStart = (e)=> {
+  // console.log('drag start');
+  dragItem = e.currentTarget;
+  const id = e.currentTarget.dataset.id
+  const item = e.currentTarget.outerHTML;
+  e.dataTransfer.setData('item', item);
+  e.dataTransfer.setData('id', id);
 }
 
-function dragEnd() {
-  console.log('drag end');
-  // this.setAttribute('draggable', false);
-}
-
-
-function dragEnter(e) {
+const dragEnter = (e) => {
   e.preventDefault();
-  console.log("drag enter");
+  // console.log("drag enter");
 }
 
-function dragOver(e) {
+const dragEnd = () => {
+  // console.log('drag end');
+}
+
+const dragOver = (e) => {
   e.preventDefault();
-  console.log('drag over');
+  // console.log('drag over');
 }
 
-function dragLeave() {
-  console.log('drag leave');
+const dragLeave = () => {
+  // console.log('drag leave');
 }
 
-// function drop(e) {
-//   console.log('drop');
-//   data = e.dataTransfer.getData('item');
-//   this.innerHTML += data;
-//   console.log(data);
-// }
-
+// Drop in Cart
 const drop = (e) => {
-  console.log(e);
-  console.log('drop');
-  data = e.dataTransfer.getData('item');
-  e.currentTarget.querySelector('span').className += ' hide';
-  dragItem.setAttribute('draggable', false);
-  dragItem.className += ' hide';
-  e.currentTarget.innerHTML += data;
-  // console.log(data);
+  console.log('drop cart');
+  if (dragItem.parentElement != dropZone) {
+    const data = e.dataTransfer.getData('item');
+
+    if (!e.currentTarget.querySelector('hide')) {
+      e.currentTarget.querySelector('span').className += ' hide';
+    }
+    // Se bloquea y se difumina el elemento
+    dragItem.setAttribute('draggable', false);
+    dragItem.className += ' hide';
+
+    // Se add el elemento del carrito
+    e.currentTarget.innerHTML += data;
+
+    // Se add a los elementos carrito su los eventos correspondientes
+    const itemsCart = dropZone.querySelectorAll('.item');
+    itemsCart.forEach(item => {
+      item.addEventListener("dragstart", dragStart);
+      item.addEventListener("dragend", dragEnd);
+    });
+  }
 };
 
+
+// Drop in Store
+const dropStore = (e) => {
+  // console.log('drop store');
+  if (dragItem.parentElement != storeZone) {
+    const id = e.dataTransfer.getData('id');
+    const item = storeZone.querySelector(`[data-id="${id}"]`);
+    item.classList.remove("hide");
+    item.setAttribute('draggable', true);
+    dropZone.removeChild(dragItem);
+
+    if (dropZone.querySelectorAll('.item').length == 0) {
+      dropZone.querySelector('span').classList.remove('hide');
+    }
+  }
+}
+
+
+// Reset todos los valores.
 const reset = () => {
-  console.log("pass reset");
   let txt = dropZone.querySelector('span');
   while (dropZone.lastChild != txt) {
     dropZone.lastChild.remove();
@@ -63,18 +83,36 @@ const reset = () => {
   });
 };
 
-btnReset.addEventListener('click', reset);
 
-// items Listener
-items.forEach(item => {
-  item.addEventListener("dragstart", dragStart);
-  item.addEventListener("dragend", dragEnd)
-});
+const init = ()=> {
+  const dropZone = document.querySelector('#dropZone');
+  const storeZone = document.querySelector('#storeZone');
+  const items = storeZone.querySelectorAll('.item');
+  const btnReset = document.querySelector('#btnReset');
+  let dragItem;
 
-// Cart listener
-dropZone.addEventListener("dragover", dragOver);
-dropZone.addEventListener("dragenter", dragEnter);
-dropZone.addEventListener("dragleave", dragLeave);
-dropZone.addEventListener("drop", drop);
+  btnReset.addEventListener('click', reset);
+
+  // items Listener
+  items.forEach((item, i) => {
+    item.addEventListener("dragstart", dragStart);
+    item.addEventListener("dragend", dragEnd);
+    item.dataset.id = i;
+  });
+
+  // Cart listener
+  dropZone.addEventListener("dragover", dragOver);
+  dropZone.addEventListener("dragenter", dragEnter);
+  dropZone.addEventListener("dragleave", dragLeave);
+  dropZone.addEventListener("drop", drop);
 
 
+  // Store listener
+  storeZone.addEventListener("dragover", dragOver);
+  storeZone.addEventListener("dragenter", dragEnter);
+  storeZone.addEventListener("dragleave", dragLeave);
+  storeZone.addEventListener("drop", dropStore);
+}
+
+
+window.onload = init();
