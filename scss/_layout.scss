@@ -85,6 +85,28 @@ footer {
   }
 }
 
+.total {
+  text-align: center;
+  @include font-size(56);
+  line-height: 1.4em;
+  padding: $generalPadding;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: rgba($white, .8);
+  min-width: 360px;
+  @include rounded(25px);
+  justify-self: center;
+  padding: $generalPadding;
+  display: inline-block;
+  border: 5px solid $color2;
+}
+
+.top {
+  row-gap: $gridGap * 2;
+  margin-bottom: 0;
+}
+
 .list {
   display: grid;
   @include col3;
