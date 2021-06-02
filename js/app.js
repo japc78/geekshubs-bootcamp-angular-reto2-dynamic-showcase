@@ -29,6 +29,16 @@ storeZone.addEventListener("drop", dropStore);
 function dragStart(e) {
   // console.log('drag start');
   dragItem = this;
+  const parent = this.parentElement;
+
+  if (parent == storeZone) {
+    if (!cartZone.classList.contains('dragOver'))
+      cartZone.className += ' dragOver';
+  } else {
+    if (!storeZone.classList.contains('dragOver'))
+      storeZone.className += ' dragOver';
+  }
+
   const item = dragItem.outerHTML;
   const id = dragItem.dataset.id;
   const price = dragItem.querySelector('.product').dataset.price;
@@ -37,28 +47,39 @@ function dragStart(e) {
   e.dataTransfer.setData('price',price);
 }
 
+function dragEnd() {
+  // console.log('drag end');
+  const parent = this.parentElement;
+  if (parent == storeZone) {
+    cartZone.classList.remove('dragOver');
+  } else {
+    storeZone.classList.remove('dragOver');
+  }
+}
+
 function dragEnter(e) {
   e.preventDefault();
   // console.log("drag enter");
 }
 
-function dragEnd() {
-  // console.log('drag end');
-}
-
 function dragOver(e) {
   e.preventDefault();
+  if (this != dragItem.parentElement && !this.classList.contains('dragOver'))
+    this.className += ' dragOver';
   // console.log('drag over');
 }
 
 function dragLeave() {
   // console.log('drag leave');
+  this.classList.remove('dragOver');
 }
 
 // Drop in Cart
 function dropCart(e) {
   // console.log('drop cart');
   if (dragItem.parentElement != cartZone) {
+    this.classList.remove('dragOver');
+
     const data = e.dataTransfer.getData('item');
 
     if (!this.querySelector('hide')) {
@@ -88,6 +109,8 @@ function dropCart(e) {
 function dropStore(e) {
   // console.log('drop store');
   if (dragItem.parentElement != storeZone) {
+    this.classList.remove('dragOver');
+
     const id = e.dataTransfer.getData('id');
     const item = storeZone.querySelector(`[data-id="${id}"]`);
     item.classList.remove("hide");

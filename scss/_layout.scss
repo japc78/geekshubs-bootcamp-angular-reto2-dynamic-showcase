@@ -43,13 +43,17 @@ footer {
   border-radius: 15px 15px 0 0;
 }
 
+.store {
+  padding: $generalPadding * 2;
+  @include rounded(25px);
+}
+
 .cart {
   border: 3px dashed $color1;
   min-height: 150px;
   position: relative;
   @include rounded(15px);
   padding: $generalPadding *2;
-  transition: all .5s ease-in-out;
 
   span {
     display: flex;
@@ -67,6 +71,17 @@ footer {
     &.hide {
       display: none;
     }
+  }
+
+
+}
+
+.store, .cart {
+  transition: all .3s ease-in-out;
+
+  &.dragOver {
+    background-color: $color2lighter;
+    transform: scale(1.05);
   }
 }
 
