@@ -1,0 +1,35 @@
+/* Reset =================================================== */
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, hgroup, menu, nav, section, time, mark, audio, video { margin : 0; padding : 0; border : 0; outline : 0; font-size : 100%; vertical-align : baseline; background : transparent; }
+
+article, aside, figure, footer, header, hgroup, nav, section { display : block; }
+
+table {	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;}
+
+fieldset, img, abbr, acronym {
+	border: 0;}
+
+address,caption,cite,code,dfn,th,var {
+	font-style: normal;
+	font-weight: normal;}
+
+ol,ul {
+	list-style: none;}
+
+caption,th {
+	text-align: left;}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: serif;
+	font-size: 1rem;
+	font-size: 100%;
+	font-weight: normal;}
+
+a {outline: none;}
+
+* {-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+
+*:focus {
+  outline: 0;
+}

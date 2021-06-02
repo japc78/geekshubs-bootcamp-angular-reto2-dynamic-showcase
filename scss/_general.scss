@@ -1,0 +1,129 @@
+@-webkit-viewport {
+  width: device-width;
+}
+@-moz-viewport {
+  width: device-width;
+}
+@-ms-viewport {
+  width: device-width;
+}
+@-o-viewport {
+  width: device-width;
+}
+@viewport {
+  width: device-width;
+}
+
+html {
+  background: $bodyColor;
+  font-size: 62.5%;
+  -webkit-overflow-scrolling: touch;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  font-family: $altFont;
+  @include font-size($baseFontSize);
+  font-weight: $baseFontWeight;
+  line-height: $baseLineHeight;
+  color: $textColor;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+
+.image {
+  overflow: hidden;
+  margin: 0;
+  line-height: 0;
+  display: flex;
+
+  img {
+    width: 100%;
+  }
+}
+
+h1 {
+  font-family: $altFont;
+  text-rendering: optimizelegibility;
+  hyphens: auto;
+  margin: 0;
+  margin-bottom: $baseLineHeight / 4;
+  font-size: $h1FontSize;
+  line-height: 1.2;
+  font-style: $h1FontStyle;
+  font-weight: $h1FontWeight;
+  color: $h1FontColor;
+  text-transform: uppercase;
+}
+
+small {
+  @include font-size(12);
+}
+
+// Botones
+.btn {
+  text-align: center;
+  color: $btnTxtColor;
+  background-color: $btnBgColor;
+  display: inline-block;
+  padding: 10px 15px 9px;
+  cursor: pointer;
+  @include font-size($btnTxTSize);
+  text-transform: uppercase;
+  font-weight: 900;
+  width: auto;
+  letter-spacing: 1px;
+  position: relative;
+  line-height: 1em;
+  transition: all 0.3s ease-in-out;
+
+  @if $btnBorderRadius > 0 {
+    @include rounded($btnBorderRadius);
+  }
+
+  @if $btnBorderSize > 0 {
+    border: $btnBorderSize solid $btnBorderColor;
+  } @else {
+    border: 0;
+  }
+
+  &.small {
+    @include font-size($btnSmallTxtSize);
+    font-family: $baseFont;
+    padding: 7px 10px 6px;
+    line-height: 1em;
+
+    @if $btnBorderRadius > 0 {
+      @include rounded($btnBorderRadius);
+    }
+
+    @if $btnBorderSize > 0 {
+      border: $btnBorderSize solid $btnBorderColor;
+    }
+  }
+
+  &:hover {
+    @if $btnBorderSize > 0 {
+      border: $btnBorderSize solid $btnBorderColorHover;
+    }
+    background-color: $btnBgColorHover;
+    color: $btnTxtColorHover;
+  }
+
+  &:disabled {
+    background: $btnDisableBgColor;
+    cursor: default;
+    @if $btnBorderSize > 0 {
+      border: $btnBorderSize solid $btnDisableBorderColor;
+    }
+    color: $btnDisableTxtColor;
+  }
+
+  i {
+    display: none;
+  }
+}

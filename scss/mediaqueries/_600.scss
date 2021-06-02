@@ -1,0 +1,21 @@
+@mixin mediaqueries_600($maxWith: 600px) {
+  .list {
+    @include col4;
+  }
+
+  .product {
+    $fontSize: 12;
+
+    @include font-size($fontSize);
+
+    .product-preview {
+      .product-name {
+        font-size: 1.4em;
+      }
+
+      .product-price {
+        font-size: 1.8em;
+      }
+    }
+  }
+}

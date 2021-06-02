@@ -1,0 +1,35 @@
+@mixin mediaqueries_480($maxWith: 480px) {
+  .product {
+    $fontSize: 10;
+
+    @include rounded(15px);
+    @include font-size($fontSize);
+
+    .product-preview {
+      display: grid;
+
+      grid-template-rows: 70% 1fr;
+      height: 100%;
+      .image {
+        width: 100%;
+
+        img {
+          object-fit: cover;
+          object-position: center center;
+        }
+      }
+
+      .product-name {
+        font-size: 1.4em;
+        text-align: center;
+        font-weight: 300;
+        margin-bottom: 5px;
+      }
+
+      .product-price {
+        font-size: 1.8em;
+        text-align: center;
+      }
+    }
+  }
+}

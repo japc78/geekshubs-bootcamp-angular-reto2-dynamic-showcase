@@ -1,0 +1,21 @@
+@mixin mediaqueries_768($maxWith: 768px) {
+  .list {
+    @include col5;
+  }
+
+  .product {
+    $fontSize: 12;
+
+    @include font-size($fontSize);
+
+    .product-preview {
+      .product-name {
+        font-size: 1.4em;
+      }
+
+      .product-price {
+        font-size: 1.8em;
+      }
+    }
+  }
+}

@@ -1,0 +1,81 @@
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&family=Open+Sans:ital,wght@0,300;0,700;1,300;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@300;400&display=swap');
+
+// Colors
+// Black and grey scale
+  $black 			    : rgb(0,0,0);
+  $darkenGrey 	  : lighten($black, 10%);
+  $darkGrey 	  	: lighten($black, 25%);
+  $grey 			    : lighten($black, 60%);
+  $lightGrey 		  : lighten($black, 85%);
+  $lighterGrey 	  : lighten($black, 95%);
+  $white 			    : rgb(255,255,255);
+
+// General Colors
+  $color1 			      : #f3e0bf;
+  $color1dark 		    : darken($color1,5);
+  $color1darken       : darken($color1,20);
+  $color1light 	 	    : lighten($color1,15);
+  $color1lighter 	 	  : lighten($color1,25);
+
+  $color2 			      : #e09c09;
+  $color2dark 		    : darken($color1,5);
+  $color2darken       : darken($color1,20);
+  $color2light 	 	    : lighten($color1,5);
+  $color2lighter 	 	  : lighten($color1,10);
+
+  $color3 			      : #4d3502;
+  $color3dark 		    : darken($color1,5);
+  $color3darken       : darken($color1,20);
+  $color3light 	 	    : lighten($color1,5);
+  $color3lighter 	 	  : lighten($color1,10);
+
+// General
+$bodyColor 		: $white;
+$textColor 		: $color3;
+$textBold     : $color1;
+$baseColor 		: $black;
+$borderColor 	: lighten($baseColor, 60%);
+
+// Tipografía y texto general
+$baseFont : 'Open Sans', sans-serif;
+$altFont: 'Londrina Solid', cursive;
+$baseFontSize : 16;
+$baseLineHeight : 1.5em;
+$baseFontWeight: normal;
+
+// Títulos h1, h2, h3, h4, h5, h6
+$h1FontWeight: 300;
+$h1FontStyle: normal;
+$h1FontSize: 3em;
+$h1FontColor: $color3;
+
+// Margenes
+$generalMargin:1.5rem;
+$generalMarginBottom:3rem;
+$generalPadding:1.5rem;
+
+// Grid
+$gridGap: $generalPadding;
+
+// Botones
+$btnTxtColor:$color3;
+$btnTxTSize: 12;
+$btnBgColor: $color2lighter;
+$btnBorderSize: 3px;
+$btnBorderRadius: 10px;
+$btnBorderColor: $color1dark;
+
+$btnTxtColorHover: $btnTxtColor;
+$btnBgColorHover: $color2;
+$btnBorderColorHover: $btnBgColorHover;
+
+$btnDisableTxtColor: $grey;
+$btnDisableBorderColor: $btnDisableTxtColor;
+$btnDisableBgColor: $lightGrey;
+
+$btnBorderSizeSmall: 2px;
+$btnSmallTxtSize: 10;

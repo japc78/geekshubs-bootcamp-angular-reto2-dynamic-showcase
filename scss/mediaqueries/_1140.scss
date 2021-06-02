@@ -1,0 +1,9 @@
+@mixin mediaqueries_1140($maxWith: 1140px) {
+  .container {
+    max-width: $maxWith;
+  }
+
+  .list {
+    @include col6;
+  }
+}
