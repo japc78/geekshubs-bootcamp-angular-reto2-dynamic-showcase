@@ -1,10 +1,13 @@
 const dragStart = (e)=> {
   // console.log('drag start');
   dragItem = e.currentTarget;
-  const id = e.currentTarget.dataset.id
-  const item = e.currentTarget.outerHTML;
+  const item = dragItem.outerHTML;
+  const id = dragItem.dataset.id;
+  const price = dragItem.querySelector('.product').dataset.price;
+  console.log(price);
   e.dataTransfer.setData('item', item);
   e.dataTransfer.setData('id', id);
+  e.dataTransfer.setData('price',price);
 }
 
 const dragEnter = (e) => {
@@ -47,6 +50,10 @@ const dropCart = (e) => {
       item.addEventListener("dragstart", dragStart);
       item.addEventListener("dragend", dragEnd);
     });
+
+    // Se suma el producto
+    const sum = parseFloat(total.innerHTML) + parseFloat(e.dataTransfer.getData('price'));
+    total.innerHTML = sum.toFixed(2);
   }
 };
 
@@ -61,15 +68,19 @@ const dropStore = (e) => {
     item.setAttribute('draggable', true);
     cartZone.removeChild(dragItem);
 
+    // Se resta el producto
+    const sub  = parseFloat(total.innerHTML) - parseFloat(e.dataTransfer.getData('price'));
+    total.innerHTML = sub.toFixed(2);
+
+    // Se muestra el mensaje
     if (cartZone.querySelectorAll('.item').length == 0) {
       cartZone.querySelector('span').classList.remove('hide');
     }
   }
 }
 
-
 // Reset todos los valores.
-const reset = () => {
+const reset = (items) => {
   let txt = cartZone.querySelector('span');
   while (cartZone.lastChild != txt) {
     cartZone.lastChild.remove();
@@ -81,6 +92,8 @@ const reset = () => {
     item.setAttribute('draggable', true);
     item.classList.remove('hide');
   });
+
+  total.innerHTML = 0;
 };
 
 
@@ -89,9 +102,8 @@ const init = ()=> {
   const storeZone = document.querySelector('#storeZone');
   const items = storeZone.querySelectorAll('.item');
   const btnReset = document.querySelector('#btnReset');
+  const total = document.querySelector('#total');
   let dragItem;
-
-  btnReset.addEventListener('click', reset);
 
   // items Listener
   items.forEach((item, i) => {
@@ -106,12 +118,15 @@ const init = ()=> {
   cartZone.addEventListener("dragleave", dragLeave);
   cartZone.addEventListener("drop", dropCart);
 
-
   // Store listener
   storeZone.addEventListener("dragover", dragOver);
   storeZone.addEventListener("dragenter", dragEnter);
   storeZone.addEventListener("dragleave", dragLeave);
   storeZone.addEventListener("drop", dropStore);
+
+  btnReset.addEventListener('click', ()=> {
+    reset(items);
+  });
 }
 
 
