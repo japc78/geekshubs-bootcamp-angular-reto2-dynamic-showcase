@@ -1,48 +1,75 @@
-const dragStart = (e)=> {
+const cartZone = document.querySelector('#cartZone');
+const storeZone = document.querySelector('#storeZone');
+const items = storeZone.querySelectorAll('.item');
+const btnReset = document.querySelector('#btnReset');
+const total = document.querySelector('#total');
+let dragItem;
+
+// items Listener
+items.forEach((item, i) => {
+  item.addEventListener("dragstart", dragStart);
+  item.addEventListener("dragend", dragEnd);
+  item.dataset.id = i;
+});
+
+btnReset.addEventListener('click', reset);
+
+// Cart listener
+cartZone.addEventListener("dragover", dragOver);
+cartZone.addEventListener("dragenter", dragEnter);
+cartZone.addEventListener("dragleave", dragLeave);
+cartZone.addEventListener("drop", dropCart);
+
+// Store listener
+storeZone.addEventListener("dragover", dragOver);
+storeZone.addEventListener("dragenter", dragEnter);
+storeZone.addEventListener("dragleave", dragLeave);
+storeZone.addEventListener("drop", dropStore);
+
+function dragStart(e) {
   // console.log('drag start');
-  dragItem = e.currentTarget;
+  dragItem = this;
   const item = dragItem.outerHTML;
   const id = dragItem.dataset.id;
   const price = dragItem.querySelector('.product').dataset.price;
-  console.log(price);
   e.dataTransfer.setData('item', item);
   e.dataTransfer.setData('id', id);
   e.dataTransfer.setData('price',price);
 }
 
-const dragEnter = (e) => {
+function dragEnter(e) {
   e.preventDefault();
   // console.log("drag enter");
 }
 
-const dragEnd = () => {
+function dragEnd() {
   // console.log('drag end');
 }
 
-const dragOver = (e) => {
+function dragOver(e) {
   e.preventDefault();
   // console.log('drag over');
 }
 
-const dragLeave = () => {
+function dragLeave() {
   // console.log('drag leave');
 }
 
 // Drop in Cart
-const dropCart = (e) => {
+function dropCart(e) {
   // console.log('drop cart');
   if (dragItem.parentElement != cartZone) {
     const data = e.dataTransfer.getData('item');
 
-    if (!e.currentTarget.querySelector('hide')) {
-      e.currentTarget.querySelector('span').className += ' hide';
+    if (!this.querySelector('hide')) {
+      this.querySelector('span').className += ' hide';
     }
     // Se bloquea y se difumina el elemento
     dragItem.setAttribute('draggable', false);
     dragItem.className += ' hide';
 
     // Se add el elemento del carrito
-    e.currentTarget.innerHTML += data;
+    this.innerHTML += data;
 
     // Se add a los elementos carrito su los eventos correspondientes
     const itemsCart = cartZone.querySelectorAll('.item');
@@ -52,14 +79,13 @@ const dropCart = (e) => {
     });
 
     // Se suma el producto
-    const sum = parseFloat(total.innerHTML) + parseFloat(e.dataTransfer.getData('price'));
-    total.innerHTML = sum.toFixed(2);
+    const totalCart = parseFloat(total.innerHTML) + parseFloat(e.dataTransfer.getData('price'));
+    resultTotal(totalCart);
   }
 };
 
-
 // Drop in Store
-const dropStore = (e) => {
+function dropStore(e) {
   // console.log('drop store');
   if (dragItem.parentElement != storeZone) {
     const id = e.dataTransfer.getData('id');
@@ -69,8 +95,8 @@ const dropStore = (e) => {
     cartZone.removeChild(dragItem);
 
     // Se resta el producto
-    const sub  = parseFloat(total.innerHTML) - parseFloat(e.dataTransfer.getData('price'));
-    total.innerHTML = sub.toFixed(2);
+    const totalCart = parseFloat(total.innerHTML) - parseFloat(e.dataTransfer.getData('price'));
+    total.innerHTML = (totalCart.toFixed(2) > 0) ? totalCart.toFixed(2) + "€": "0 €";
 
     // Se muestra el mensaje
     if (cartZone.querySelectorAll('.item').length == 0) {
@@ -80,7 +106,7 @@ const dropStore = (e) => {
 }
 
 // Reset todos los valores.
-const reset = (items) => {
+function reset() {
   let txt = cartZone.querySelector('span');
   while (cartZone.lastChild != txt) {
     cartZone.lastChild.remove();
@@ -96,38 +122,6 @@ const reset = (items) => {
   total.innerHTML = 0;
 };
 
-
-const init = ()=> {
-  const cartZone = document.querySelector('#cartZone');
-  const storeZone = document.querySelector('#storeZone');
-  const items = storeZone.querySelectorAll('.item');
-  const btnReset = document.querySelector('#btnReset');
-  const total = document.querySelector('#total');
-  let dragItem;
-
-  // items Listener
-  items.forEach((item, i) => {
-    item.addEventListener("dragstart", dragStart);
-    item.addEventListener("dragend", dragEnd);
-    item.dataset.id = i;
-  });
-
-  // Cart listener
-  cartZone.addEventListener("dragover", dragOver);
-  cartZone.addEventListener("dragenter", dragEnter);
-  cartZone.addEventListener("dragleave", dragLeave);
-  cartZone.addEventListener("drop", dropCart);
-
-  // Store listener
-  storeZone.addEventListener("dragover", dragOver);
-  storeZone.addEventListener("dragenter", dragEnter);
-  storeZone.addEventListener("dragleave", dragLeave);
-  storeZone.addEventListener("drop", dropStore);
-
-  btnReset.addEventListener('click', ()=> {
-    reset(items);
-  });
+function resultTotal(totalCart) {
+  total.innerHTML = (totalCart.toFixed(2) > 0) ? totalCart.toFixed(2) + "€" : "0 €";
 }
-
-
-window.onload = init();
