@@ -85,6 +85,7 @@ function dropCart(e) {
     if (!this.querySelector('hide')) {
       this.querySelector('span').className += ' hide';
     }
+
     // Se bloquea y se difumina el elemento
     dragItem.setAttribute('draggable', false);
     dragItem.className += ' hide';
@@ -94,6 +95,11 @@ function dropCart(e) {
 
     // Se add a los elementos carrito su los eventos correspondientes
     const itemsCart = cartZone.querySelectorAll('.item');
+
+    if (itemsCart.length > 0) {
+      this.querySelectorAll('span')[1].classList.remove('hide');
+    }
+
     itemsCart.forEach(item => {
       item.addEventListener("dragstart", dragStart);
       item.addEventListener("dragend", dragEnd);
@@ -123,7 +129,8 @@ function dropStore(e) {
 
     // Se muestra el mensaje
     if (cartZone.querySelectorAll('.item').length == 0) {
-      cartZone.querySelector('span').classList.remove('hide');
+      cartZone.querySelectorAll('span')[0].classList.remove('hide');
+      cartZone.querySelectorAll('span')[1].className += ' hide';
     }
   }
 }
